@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('fill', 'fillTableController@fill');
+
+Route::get('delete', 'fillTableController@delete');
