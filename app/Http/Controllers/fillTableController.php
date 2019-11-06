@@ -9,13 +9,19 @@ use App\Jobs\fillTableJob;
 class fillTableController extends Controller
 {
     function fill(){
-    
-    $job = (new fillTableJob())
+    $totalPerInsert = 10000;
+    $lastInsert = 1;
+    for($iteracion=1;$iteracion<=2;$iteracion++){
+
+            $job = (new fillTableJob($lastInsert,$totalPerInsert*$iteracion))
             ->delay(now()->addSeconds(5));
+        
+        dispatch($job);
+        $lastInsert = $totalPerInsert*$iteracion;
+    }
 
-    dispatch($job);
 
-        return 'Data Created';
+        return 'Server is working...';
     }
 
 
